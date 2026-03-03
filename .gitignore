@@ -1,0 +1,30 @@
+# Index data (rebuild with: biopackathon-ingest)
+data/index/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+*.eggs/
+
+# Environment
+.env
+.venv/
+venv/
+
+# IDE
+.vscode/
+.idea/
+
+# Claude Code local settings
+.claude/settings.local.json
+
+# OS
+.DS_Store
+._*
+
+# pytest
+.pytest_cache/

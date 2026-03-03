@@ -1,0 +1,73 @@
+# Reproducibility audit rules for Bio'Pack'athon
+# Each rule has: id, severity, description, and detection parameters.
+
+rules:
+  - id: container
+    severity: warn
+    description: "Presence of Dockerfile or Containerfile (including Singularity)"
+    glob_patterns:
+      - "Dockerfile"
+      - "Dockerfile.*"
+      - "Containerfile"
+      - "*.def"          # Singularity definition
+
+  - id: lockfile
+    severity: warn
+    description: "Presence of dependency version lock files"
+    glob_patterns:
+      - "requirements.txt"
+      - "Pipfile.lock"
+      - "poetry.lock"
+      - "uv.lock"
+      - "conda-lock.yml"
+      - "environment.yml"
+      - "renv.lock"
+      - "Manifest.toml"   # Julia
+      - "package-lock.json"
+      - "yarn.lock"
+      - "pnpm-lock.yaml"
+
+  - id: workflow
+    severity: info
+    description: "Presence of workflow engine definition files"
+    glob_patterns:
+      - "Snakefile"
+      - "*.smk"
+      - "nextflow.config"
+      - "main.nf"
+      - "*.nf"
+      - "*.cwl"
+      - "*.wdl"
+      - "Makefile"
+
+  - id: seed
+    severity: warn
+    description: "Presence of random seed pinning (Python/R/Julia)"
+    patterns:
+      python:
+        - 'random\.seed\s*\('
+        - 'np\.random\.seed\s*\('
+        - 'torch\.manual_seed\s*\('
+        - 'set_random_seed\s*\('
+        - 'tf\.random\.set_seed\s*\('
+      r:
+        - 'set\.seed\s*\('
+      julia:
+        - 'Random\.seed!\s*\('
+
+  - id: readme_repro
+    severity: error
+    description: "Whether the README contains minimal reproduction commands"
+    readme_patterns:
+      - '```'                       # code block exists
+      - '(install|setup|run|usage|getting.started|how.to|quickstart|reproduce)'
+
+  - id: download_urls
+    severity: info
+    description: "Hardcoded download URLs scattered in code, and presence of checksums"
+    url_pattern: 'https?://[^\s"''\)>]+'
+    checksum_patterns:
+      - 'md5'
+      - 'sha256'
+      - 'sha1'
+      - 'checksum'

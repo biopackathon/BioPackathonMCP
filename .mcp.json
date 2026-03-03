@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "biopackathon-mcp": {
+      "command": "/home/koki/anaconda3/bin/biopackathon-mcp",
+      "args": []
+    }
+  }
+}

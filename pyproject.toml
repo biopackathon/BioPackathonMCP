@@ -1,0 +1,36 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "biopackathon-mcp"
+version = "0.1.0"
+description = "MCP server for Bio'Pack'athon YouTube playlist – search, Q&A, recommendations, and reproducibility audit"
+requires-python = ">=3.10"
+dependencies = [
+    "google-api-python-client>=2.100",
+    "youtube-transcript-api>=0.6",
+    "sentence-transformers>=2.2",
+    "faiss-cpu>=1.7",
+    "rank-bm25>=0.2",
+    "mcp>=1.0",
+    "pyyaml>=6",
+    "numpy>=1.24",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7",
+    "pytest-asyncio>=0.21",
+]
+
+[project.scripts]
+biopackathon-ingest = "biopackathon_mcp.ingest_youtube:main"
+biopackathon-mcp = "biopackathon_mcp.mcp_server:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/biopackathon_mcp"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
