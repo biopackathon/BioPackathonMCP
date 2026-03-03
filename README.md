@@ -7,13 +7,7 @@ An MCP server that searches and performs Q&A on subtitles from the Bio"Pack"atho
 ### 1. Installation
 
 ```bash
-pip install -e ".[dev]"
-```
-
-Or using `uv`:
-
-```bash
-uv pip install -e ".[dev]"
+pip install git+https://github.com/biopackathon/BioPackathonMCP.git
 ```
 
 ### 2. Environment Variables
@@ -21,6 +15,17 @@ uv pip install -e ".[dev]"
 ```bash
 export YOUTUBE_API_KEY="your-youtube-data-api-key"
 ```
+
+<details>
+<summary>Development installation</summary>
+
+```bash
+git clone https://github.com/biopackathon/BioPackathonMCP.git
+cd BioPackathonMCP
+pip install -e ".[dev]"
+```
+
+</details>
 
 ## Usage
 
