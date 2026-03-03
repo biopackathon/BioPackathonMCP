@@ -43,12 +43,37 @@ Ingests all videos with subtitles and builds a hybrid search index (FAISS + BM25
 
 MCP clients such as Claude Desktop and Claude Code **automatically start and manage** the server based on configuration files. You do not need to run `biopackathon-mcp` manually.
 
+The quickest way to configure is to use the `biopackathon-setup` command:
+
+```bash
+# Claude Code — user-level (~/.claude/settings.json)
+biopackathon-setup
+
+# Claude Code — project-level (.claude/settings.json)
+biopackathon-setup --project
+
+# Claude Desktop
+biopackathon-setup --desktop
+```
+
+The command auto-detects the `biopackathon-mcp` path and merges with existing settings without overwriting them. If `YOUTUBE_API_KEY` is set in the environment, it is included automatically.
+
+| Flag | Description |
+|---|---|
+| `--project` | Write to `.claude/settings.json` in the current directory |
+| `--desktop` | Write to the Claude Desktop configuration file |
+| `--force` | Overwrite existing entry if present |
+| `--dry-run` | Show what would be written without making changes |
+
+<details>
+<summary>Manual configuration</summary>
+
 **Claude Desktop** — Add to `claude_desktop_config.json`:
 
 ```json
 {
   "mcpServers": {
-    "biopackathon": {
+    "biopackathon-mcp": {
       "command": "biopackathon-mcp",
       "env": {
         "YOUTUBE_API_KEY": "your-key"
@@ -63,7 +88,7 @@ MCP clients such as Claude Desktop and Claude Code **automatically start and man
 ```json
 {
   "mcpServers": {
-    "biopackathon": {
+    "biopackathon-mcp": {
       "command": "biopackathon-mcp",
       "env": {
         "YOUTUBE_API_KEY": "your-key"
@@ -72,6 +97,8 @@ MCP clients such as Claude Desktop and Claude Code **automatically start and man
   }
 }
 ```
+
+</details>
 
 After configuration, the client will automatically start the server at the beginning of each session.
 

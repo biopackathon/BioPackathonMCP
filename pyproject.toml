@@ -27,6 +27,7 @@ dev = [
 [project.scripts]
 biopackathon-ingest = "biopackathon_mcp.ingest_youtube:main"
 biopackathon-mcp = "biopackathon_mcp.mcp_server:main"
+biopackathon-setup = "biopackathon_mcp.setup_claude:main"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/biopackathon_mcp"]
